@@ -18,6 +18,7 @@ struct NotesView: View {
     @State private var selectedNoteColor: Color = .yellow
     @State private var showNotebookEditing = false
     @State private var showDeleteNote = false
+    @State private var showSpeechRecognition = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -87,7 +88,7 @@ struct NotesView: View {
                         .padding(.bottom, 20)
                     
                     // Bottom toolbar
-                    BottomToolbarView(showColorSettings: $showColorSettings, showDeleteNote: $showDeleteNote)
+                    BottomToolbarView(showColorSettings: $showColorSettings, showDeleteNote: $showDeleteNote, showSpeechRecognition: $showSpeechRecognition)
                 }
             }
         }
@@ -103,6 +104,20 @@ struct NotesView: View {
                 isPresented: $showNotebookEditing,
                 note: $notes[currentPage]
             )
+        }
+        .fullScreenCover(isPresented: $showSpeechRecognition) {
+            SpeechRecognitionView(isPresented: $showSpeechRecognition) { recognizedText in
+                // Add recognized text to current note
+                if currentPage < notes.count {
+                    if notes[currentPage].text.isEmpty {
+                        notes[currentPage].text = recognizedText
+                    } else {
+                        notes[currentPage].text += " " + recognizedText
+                    }
+                    dataManager.saveNotes(notes)
+                    syncToWidget()
+                }
+            }
         }
         .overlay(
             // Delete note dialog

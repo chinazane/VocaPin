@@ -10,6 +10,7 @@ import SwiftUI
 struct BottomToolbarView: View {
     @Binding var showColorSettings: Bool
     @Binding var showDeleteNote: Bool
+    @Binding var showSpeechRecognition: Bool
     
     var body: some View {
         HStack {
@@ -31,7 +32,9 @@ struct BottomToolbarView: View {
             Spacer()
             
             // Center microphone button
-            Button(action: {}) {
+            Button(action: {
+                showSpeechRecognition = true
+            }) {
                 Circle()
                     .fill(Color.yellow)
                     .frame(width: 70, height: 70)
@@ -67,5 +70,5 @@ struct BottomToolbarView: View {
 }
 
 #Preview {
-    BottomToolbarView(showColorSettings: .constant(false), showDeleteNote: .constant(false))
+    BottomToolbarView(showColorSettings: .constant(false), showDeleteNote: .constant(false), showSpeechRecognition: .constant(false))
 }

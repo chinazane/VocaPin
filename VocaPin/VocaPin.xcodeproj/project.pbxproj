@@ -52,11 +52,21 @@
 			);
 			target = 5816EA9B2E59EEF600022F58 /* VocaPinWidgetExtension */;
 		};
+		5821CB042E5D8CDA0096BDEB /* Exceptions for "VocaPin" folder in "VocaPin" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5816EA722E58C5AE00022F58 /* VocaPin */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5816EA752E58C5AE00022F58 /* VocaPin */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5821CB042E5D8CDA0096BDEB /* Exceptions for "VocaPin" folder in "VocaPin" target */,
+			);
 			path = VocaPin;
 			sourceTree = "<group>";
 		};
@@ -191,7 +201,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 5816EA6A2E58C5AE00022F58;
 			minimizedProjectReferenceProxies = 1;
@@ -381,6 +390,7 @@
 				DEVELOPMENT_TEAM = ZG2TDY486L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VocaPin/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -410,6 +420,7 @@
 				DEVELOPMENT_TEAM = ZG2TDY486L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VocaPin/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
