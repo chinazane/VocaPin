@@ -19,7 +19,7 @@ struct StickyNoteView: View {
         ZStack {
             // NOTE BACKGROUND
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .fill(note.color ?? .yellow)
+                .fill(note.color)
                 .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 6)
             
             // NOTE CONTENT
@@ -136,7 +136,7 @@ struct StickyNoteView: View {
         ZStack {
             // NOTE BACKGROUND
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .fill(note.color ?? .yellow)
+                .fill(note.color)
                 .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 6)
 
             // NOTE CONTENT

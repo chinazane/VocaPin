@@ -26,6 +26,36 @@ struct NoteColorSettingsView: View {
         Color(red: 0.4, green: 0.6, blue: 0.4)   // Dark green
     ]
     
+    // Helper function to find closest color match with tolerance
+    private func findClosestColorIndex(for color: Color) -> Int {
+        let targetUIColor = UIColor(color)
+        var targetRed: CGFloat = 0, targetGreen: CGFloat = 0, targetBlue: CGFloat = 0, targetAlpha: CGFloat = 0
+        targetUIColor.getRed(&targetRed, green: &targetGreen, blue: &targetBlue, alpha: &targetAlpha)
+        
+        var closestIndex = 0
+        var smallestDistance: CGFloat = CGFloat.greatestFiniteMagnitude
+        
+        for (index, noteColor) in noteColors.enumerated() {
+            let noteUIColor = UIColor(noteColor)
+            var noteRed: CGFloat = 0, noteGreen: CGFloat = 0, noteBlue: CGFloat = 0, noteAlpha: CGFloat = 0
+            noteUIColor.getRed(&noteRed, green: &noteGreen, blue: &noteBlue, alpha: &noteAlpha)
+            
+            // Calculate Euclidean distance in RGB space
+            let distance = sqrt(
+                pow(targetRed - noteRed, 2) +
+                pow(targetGreen - noteGreen, 2) +
+                pow(targetBlue - noteBlue, 2)
+            )
+            
+            if distance < smallestDistance {
+                smallestDistance = distance
+                closestIndex = index
+            }
+        }
+        
+        return closestIndex
+    }
+    
     var body: some View {
         ZStack {
             // Background matching main app
@@ -95,10 +125,8 @@ struct NoteColorSettingsView: View {
             }
         }
         .onAppear {
-            // Set initial selection based on current color
-            if let index = noteColors.firstIndex(of: selectedColor) {
-                selectedColorIndex = index
-            }
+            // Set initial selection based on closest color match
+            selectedColorIndex = findClosestColorIndex(for: selectedColor)
         }
     }
 }

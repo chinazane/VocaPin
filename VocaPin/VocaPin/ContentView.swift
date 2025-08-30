@@ -96,7 +96,7 @@ struct NotesView: View {
         .fullScreenCover(isPresented: $showColorSettings) {
             NoteColorSettingsView(
                 isPresented: $showColorSettings,
-                selectedColor: $selectedNoteColor
+                selectedColor: currentPage < notes.count ? $notes[currentPage].color : $selectedNoteColor
             )
         }
         .fullScreenCover(isPresented: $showNotebookEditing) {
@@ -150,6 +150,11 @@ struct NotesView: View {
             notes = dataManager.loadNotes()
             currentPage = dataManager.loadCurrentPage()
             selectedNoteColor = dataManager.loadSelectedColor()
+            
+            // Sync selectedNoteColor with current note's color
+            if currentPage < notes.count {
+                selectedNoteColor = notes[currentPage].color
+            }
             
             print("📊 App: Loaded \(notes.count) notes, current page: \(currentPage)")
             
@@ -224,6 +229,10 @@ struct NotesView: View {
         .onChange(of: currentPage) { _ in
             // Update widget when current page changes
             syncToWidget()
+            // Sync selectedNoteColor with current note's color
+            if currentPage < notes.count {
+                selectedNoteColor = notes[currentPage].color
+            }
         }
     }
     
@@ -235,6 +244,8 @@ struct NotesView: View {
         // Update widget data
         syncToWidget()
     }
+    
+
     
     private func syncToWidget() {
        // print("📤 App: syncToWidget called")

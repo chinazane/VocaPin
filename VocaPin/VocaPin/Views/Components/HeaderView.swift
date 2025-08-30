@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @State private var showProfileSettings = false
+    
     var body: some View {
         HStack {
             Button(action: {}) {
@@ -25,7 +27,9 @@ struct HeaderView: View {
             
             Spacer()
             
-            Button(action: {}) {
+            Button(action: {
+                showProfileSettings = true
+            }) {
                 Image(systemName: "gearshape")
                     .font(.title2)
                     .foregroundColor(.black)
@@ -34,6 +38,9 @@ struct HeaderView: View {
         .padding(.horizontal, 20)
         .padding(.top, 10)
         .background(Color(red: 0.9, green: 0.85, blue: 0.8))
+        .fullScreenCover(isPresented: $showProfileSettings) {
+            ProfileSettingsView()
+        }
     }
 }
 
